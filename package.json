@@ -23,6 +23,7 @@
         "@skpm/builder": "^0.5.2"
     },
     "author": "Bohemian Coding",
+    "repository": "https://github.com/BohemianCoding/plugins.example.data-translate.git",
     "dependencies": {
         "@skpm/fs": "^0.2.0"
     }
