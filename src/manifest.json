@@ -11,7 +11,8 @@
             "actions" : {
               "Startup" : "onStartup",
               "Shutdown" : "onShutdown",
-              "SupplyTranslation" : "onSupplyTranslation"
+              "SupplyRussianTranslation" : "onSupplyRussianTranslation",
+              "SupplyJapaneseTranslation" : "onSupplyJapaneseTranslation"
             }
           }
         }
