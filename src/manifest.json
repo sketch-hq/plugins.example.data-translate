@@ -1,0 +1,19 @@
+{
+    "name": "Data Translate",
+    "compatibleVersion": 3,
+    "bundleVersion": 1,
+    "icon": "icon.png",
+    "suppliesData" : true,
+    "commands": [
+        {
+          "script" : "DataTranslate.js",
+          "handlers" : {
+            "actions" : {
+              "Startup" : "onStartup",
+              "Shutdown" : "onShutdown",
+              "SupplyTranslation" : "onSupplyTranslation"
+            }
+          }
+        }
+    ]
+}
