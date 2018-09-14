@@ -8,7 +8,7 @@ const API_URL = `https://translate.yandex.net/api/v1.5/tr.json/`
 
 export function onStartup () {
   // Register the plugin
-  DataSupplier.registerDataSupplier('public.text', 'Data Translate', 'SupplyTranslation')
+  DataSupplier.registerDataSupplier('public.text', 'Translate to Random Language', 'SupplyTranslation')
 }
 
 export function onShutdown () {
@@ -23,16 +23,12 @@ export function onSupplyTranslation (context) {
       let dataKey = context.data.key
       const items = util.toArray(context.data.items).map(sketch.fromNative)
       items.forEach((item, index) => {
+        let targetLanguage = langs[Math.floor(Math.random()*langs.length)]
         detectLanguageFor(item.text)
-          .then(sourceLanguage => {
-            let targetLanguage = langs[Math.floor(Math.random()*langs.length)]
-            const url = `${API_URL}translate?key=${YANDEX_API_KEY}&lang=${sourceLanguage}-${targetLanguage}&text=${encodeURI(item.text)}`
-            fetch(url)
-              .then(response => response.json())
-              .then(json => {
-                DataSupplier.supplyDataAtIndex(dataKey, json.text[0], index)
-                UI.message(null)
-              })
+          .then(sourceLanguage => translateText(item.text, sourceLanguage, targetLanguage))
+          .then(translation => {
+            DataSupplier.supplyDataAtIndex(dataKey, translation, index)
+            UI.message(null)
           })
       })
     }).catch(e => console.error(e))
@@ -41,8 +37,9 @@ export function onSupplyTranslation (context) {
 function getAvailableLanguages(){
   return new Promise(function(resolve, reject){
     fetch(`${API_URL}getLangs?key=${YANDEX_API_KEY}&ui=en`)
-      .then(response => response.json())
-      .then(json => resolve(Object.keys(json.langs)))
+    .then(response => response.json())
+    .then(json => resolve(Object.keys(json.langs)))
+    .catch(e => resolve(e))
   })
 }
 
@@ -54,5 +51,16 @@ function detectLanguageFor(text){
     .then(json => {
       resolve(json.lang)
     })
+    .catch(e => resolve(e))
+  })
+}
+
+function translateText(text, sourceLanguage, targetLanguage) {
+  return new Promise((resolve, reject) => {
+    let translateURL = `${API_URL}translate?key=${YANDEX_API_KEY}&lang=${sourceLanguage}-${targetLanguage}&text=${encodeURI(text)}`
+    fetch(translateURL)
+    .then(response => response.json())
+    .then(json => resolve(json.text[0]))
+    .catch(e => resolve(e))
   })
 }
