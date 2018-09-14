@@ -1,7 +1,7 @@
 {
     "name": "data-translate",
     "description": "A sample plugin that shows how to access a layer inside a Data plugin",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "engines": {
         "sketch": ">=3.0"
     },
