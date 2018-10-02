@@ -3,6 +3,7 @@ const { DataSupplier, UI } = sketch
 const util = require('util')
 const config = {}
 
+// Get your own API key at https://translate.yandex.com/developers/keys :)
 const YANDEX_API_KEY = "trnsl.1.1.20180912T154941Z.a526333405a74b23.f809d9991b4d9e56bf40c95e7d5325513669a25b"
 const API_URL = `https://translate.yandex.net/api/v1.5/tr.json/`
 
