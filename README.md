@@ -1,5 +1,7 @@
 # plugin.examples.translate
 
+**Disclaimer:** When we created this plugin, we used the free tier of the [Yandex Translation API](https://yandex.com/dev/translate/). This has since been retired, so the plugin is no longer functional out of the box. It is still a good learning resource, but if you want to actually use it you'll need to [register an account at Yandex](https://translate.yandex.com/developers/account), create a personal API key, and add it on `src/DataTranslate.js`.
+
 _This plugin was created using `skpm`. For a detailed explanation on how things work, checkout the [skpm Readme](https://github.com/skpm/skpm/blob/master/README.md)._
 
 ## Usage
